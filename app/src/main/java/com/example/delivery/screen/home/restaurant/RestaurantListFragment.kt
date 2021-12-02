@@ -22,6 +22,7 @@ class RestaurantListFragment : BaseFragment<RestaurantListViewModel, FragmentLis
 
     private val adapter by lazy {
         ModelRecyclerAdapter<RestaurantModel, RestaurantListViewModel>(listOf(), viewModel, adapterListener = object : RestaurantListListener {
+            // 매장 리스트중에서 한 아이템이 클리되었을 경우
             override fun onClickItem(model: RestaurantModel) {
                 startActivity(
                     RestaurantDetailActivity.newIntent(requireContext(), model.toEntity())

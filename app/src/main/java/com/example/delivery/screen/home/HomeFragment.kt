@@ -232,7 +232,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 locationLatLng
             )
             viewPager.adapter = viewPagerAdapter
+            // 뷰페이저 재사용
             viewPager.offscreenPageLimit = restaurantCategories.size
+            //텝레이아웃에 탭들을 뿌려주도록함
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.setText(RestaurantCategory.values()[position].categoryNameId)
             }.attach()
