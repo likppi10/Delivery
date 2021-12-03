@@ -14,6 +14,7 @@ class DefaultRestaurantRepository(
     private val ioDispatcher: CoroutineDispatcher
 ) : RestaurantRepository {
 
+    //리스트의 값은 restaurant Enitity의 값으로 넣어줄것임
     override suspend fun getList(
         restaurantCategory: RestaurantCategory,
         locationLatLngEntity: LocationLatLngEntity

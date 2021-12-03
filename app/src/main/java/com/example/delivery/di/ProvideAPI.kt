@@ -12,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+//2
 fun provideMapApiService(retrofit: Retrofit): MapApiService {
     return retrofit.create(MapApiService::class.java)
 }
@@ -42,10 +43,12 @@ fun provideFoodRetrofit(
         .build()
 }
 
+// Gson에 대한 의존성
 fun provideGsonConverterFactory(): GsonConverterFactory {
     return GsonConverterFactory.create()
 }
 
+//retrofit을 쓰기위한 okhttp변환에 필요한 요소
 fun buildOkHttpClient(): OkHttpClient {
     val interceptor = HttpLoggingInterceptor()
     if (BuildConfig.DEBUG) {

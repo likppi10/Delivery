@@ -77,7 +77,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipInitialize"
-                style="@style/Widget.Aoppart6chapter01.Chip"
+                style="@style/Widget.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/initialize"
@@ -89,7 +89,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipFastDelivery"
-                style="@style/Widget.Aoppart6chapter01.Chip"
+                style="@style/Widget.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fast_delivery"
@@ -99,7 +99,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipDeliveryTip"
-                style="@style/Widget.Aoppart6chapter01.Chip"
+                style="@style/Widget.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/low_delivery_tip"
@@ -109,7 +109,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipDefault"
-                style="@style/Widget.Aoppart6chapter01.Chip"
+                style="@style/Widget.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/default_order"
@@ -117,7 +117,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTopRate"
-                style="@style/Widget.Aoppart6chapter01.Chip"
+                style="@style/Widget.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/top_rate"

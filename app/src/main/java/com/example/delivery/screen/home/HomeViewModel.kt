@@ -34,6 +34,7 @@ class HomeViewModel(
         val currentLocation = userLocation ?: locationLatLngEntity
 
         val addressInfo = mapRepository.getReverseGeoInformation(currentLocation)
+        //addressInfo가 null이 아니면
         addressInfo?.let { info ->
             homeStateLiveData.value = HomeState.Success(
                 MapSearchInfoEntity(
@@ -43,7 +44,9 @@ class HomeViewModel(
                 ),
                 isLocationSame = userLocation == locationLatLngEntity
             )
-        } ?: kotlin.run {
+        }
+        //addressInfo null이면
+        ?: kotlin.run {
             homeStateLiveData.value = HomeState.Error(
                 messageId = R.string.can_not_load_address_info
             )

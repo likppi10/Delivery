@@ -10,7 +10,7 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface MapApiService {
-
+    //1
     @GET(Url.GET_TMAP_POIS)
     suspend fun getSearchLocation(
         @Header("appKey") appKey: String = Key.TMAP_API,

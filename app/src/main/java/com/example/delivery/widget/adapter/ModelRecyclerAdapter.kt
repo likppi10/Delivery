@@ -21,6 +21,7 @@ class ModelRecyclerAdapter<M : Model, VM: BaseViewModel>(
 
     override fun getItemCount(): Int = modelList.size
 
+    //ordinal : enum 클래스에서 해당하는 값을 불러오기 위한 인덱스로써 반환
     override fun getItemViewType(position: Int) = modelList[position].type.ordinal
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModelViewHolder<M> {

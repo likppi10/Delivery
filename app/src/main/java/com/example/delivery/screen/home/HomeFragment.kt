@@ -66,10 +66,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            // 받은 권한
             val responsePermissions = permissions.entries.filter {
                 it.key == Manifest.permission.ACCESS_FINE_LOCATION
                     || it.key == Manifest.permission.ACCESS_COARSE_LOCATION
             }
+            // 필요한 권한 개수 = 받은 권한 개수 인지 확인
             if (responsePermissions.filter { it.value == true }.size == locationPermissions.size) {
                 setMyLocationListener()
             } else {
@@ -140,9 +142,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun getMyLocation() {
+        // location manager 설정
         if (::locationManager.isInitialized.not()) {
             locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }
+        //GPS 켜져있는지 확인
         val isGpsEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (isGpsEnable) {
             locationPermissionLauncher.launch(locationPermissions)
@@ -169,6 +173,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun observeData() {
+        //HomeState에서 위치정보의 현재 state에 따라서 분기를 줘서 처리
         viewModel.homeStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is HomeState.Uninitialized -> {
@@ -232,7 +237,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 locationLatLng
             )
             viewPager.adapter = viewPagerAdapter
+            // 뷰페이저 재사용
             viewPager.offscreenPageLimit = restaurantCategories.size
+            //텝레이아웃에 탭들을 뿌려주도록함
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.setText(RestaurantCategory.values()[position].categoryNameId)
             }.attach()
@@ -255,6 +262,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         override fun onLocationChanged(location: Location) {
             viewModel.loadReverseGeoInformation(
+                // 별거 아닌거도 전부 entity를 만들어 사용
                 LocationLatLngEntity(
                     location.latitude,
                     location.longitude

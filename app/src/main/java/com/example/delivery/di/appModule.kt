@@ -46,6 +46,7 @@ import org.koin.dsl.module
 
 val appModule = module {
 
+    // 메인 액티비티와 하단 탭 화면에서 쓰는 뷰모델
     viewModel { MainViewModel() }
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { RestaurantLikeListViewModel(get()) }
@@ -79,12 +80,14 @@ val appModule = module {
     single<RestaurantReviewRepository> { DefaultRestaurantReviewRepository(get(), get()) }
     single { GalleryPhotoRepository(androidApplication()) }
 
+    // retrofit을 위한 요소
     single { provideGsonConverterFactory() }
     single { buildOkHttpClient() }
 
     single(named("map")) { provideMapRetrofit(get(), get()) }
     single(named("food")) { provideFoodRetrofit(get(), get()) }
 
+    //3
     single { provideMapApiService(get(qualifier = named("map"))) }
     single { provideFoodApiService(get(qualifier = named("food"))) }
 
@@ -93,11 +96,13 @@ val appModule = module {
     single { provideFoodMenuBasketDao(get()) }
     single { provideRestaurantDao(get()) }
 
+    // ResourcesProvider
     single<ResourcesProvider> { DefaultResourcesProvider(androidApplication()) }
     single { AppPreferenceManager(androidContext()) }
 
     single { MenuChangeEventBus() }
 
+    //Coroutine에 필요한 요소
     single { Dispatchers.IO }
     single { Dispatchers.Main }
 

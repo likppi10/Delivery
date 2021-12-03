@@ -31,6 +31,7 @@ abstract class BaseActivity<VM: BaseViewModel, VB: ViewBinding>: AppCompatActivi
 
     open fun initViews() = Unit
 
+    // 데이터를 관찰해서 처리해주기 위한 메서드
     abstract fun observeData()
 
     override fun onDestroy() {
