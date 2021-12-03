@@ -87,6 +87,7 @@ val appModule = module {
     single(named("map")) { provideMapRetrofit(get(), get()) }
     single(named("food")) { provideFoodRetrofit(get(), get()) }
 
+    //3
     single { provideMapApiService(get(qualifier = named("map"))) }
     single { provideFoodApiService(get(qualifier = named("food"))) }
 

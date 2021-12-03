@@ -8,10 +8,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class DefaultMapRepository(
+    //4
     private val mapApiService: MapApiService,
     private val ioDispatcher: CoroutineDispatcher
 ): MapRepository {
 
+    //String이 아닌 addressInfo라는 객체로 주소값을 받는다.
     override suspend fun getReverseGeoInformation(
         locationLatLngEntity: LocationLatLngEntity
     ): AddressInfo? = withContext(ioDispatcher) {
