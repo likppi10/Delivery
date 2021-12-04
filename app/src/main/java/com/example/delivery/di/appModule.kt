@@ -91,6 +91,7 @@ val appModule = module {
     single { provideMapApiService(get(qualifier = named("map"))) }
     single { provideFoodApiService(get(qualifier = named("food"))) }
 
+    //ProvideDB
     single { provideDB(androidApplication()) }
     single { provideLocationDao(get()) }
     single { provideFoodMenuBasketDao(get()) }

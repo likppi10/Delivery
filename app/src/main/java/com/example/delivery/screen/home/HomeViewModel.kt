@@ -30,6 +30,8 @@ class HomeViewModel(
         locationLatLngEntity: LocationLatLngEntity
     ) = viewModelScope.launch {
         homeStateLiveData.value = HomeState.Loading
+
+        //UserLocation을 가져온다. 가져온게 없으면 현재 위치로
         val userLocation = userRepository.getUserLocation()
         val currentLocation = userLocation ?: locationLatLngEntity
 

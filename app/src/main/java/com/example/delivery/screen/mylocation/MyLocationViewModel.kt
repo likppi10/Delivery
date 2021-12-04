@@ -25,6 +25,7 @@ class MyLocationViewModel(
         )
     }
 
+    // 지도를 비추고 있는 카메라가 움직임을 알고 바뀌는 위치를 감지
     fun changeLocationInfo(
         locationLatLngEntity: LocationLatLngEntity
     ) = viewModelScope.launch {
@@ -42,6 +43,7 @@ class MyLocationViewModel(
         }
     }
 
+    // 유저 정보에 저장 된 위치정보와 GPS상에 잡히는 위치정보의 비교를 위해 유저 Repository에 저장된다.
     fun confirmSelectLocation() = viewModelScope.launch {
         when(val data = myLocationStateLiveData.value) {
             is MyLocationState.Success -> {
