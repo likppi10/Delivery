@@ -227,6 +227,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
+        //위치 정보가 잘 확보된 상태여야 탭레이아웃 보여주겠다.
         orderChipGroup.isVisible = true
         if (::viewPagerAdapter.isInitialized.not()) {
             val restaurantCategories = RestaurantCategory.values()
