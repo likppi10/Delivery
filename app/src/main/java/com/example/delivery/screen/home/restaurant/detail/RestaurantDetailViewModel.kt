@@ -23,6 +23,7 @@ class RestaurantDetailViewModel(
             restaurantEntity = restaurantEntity
         )
         restaurantDetailStateLiveData.value = RestaurantDetailState.Loading
+
         val foods = restaurantFoodRepository.getFoods(restaurantEntity.restaurantInfoId, restaurantEntity.restaurantTitle)
         val foodMenuListInBasket = restaurantFoodRepository.getAllFoodMenuListInBasket()
         val isLiked = userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle) != null
@@ -37,12 +38,15 @@ class RestaurantDetailViewModel(
     fun toggleLikedRestaurant() = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
+                // Usser Repository에서 해당음식점을 좋아요 한적이 없는 경우
                 userRepository.getUserLikedRestaurant(restaurantEntity.restaurantTitle)?.let {
                     userRepository.deleteUserLikedRestaurant(it.restaurantTitle)
                     restaurantDetailStateLiveData.value = data.copy(
                         isLiked = false
                     )
-                } ?: kotlin.run {
+                } ?:
+                // Usser Repository에서 해당음식점을 좋아요 한적이 있는 경우
+                kotlin.run {
                     userRepository.insertUserLikedRestaurant(restaurantEntity)
                     restaurantDetailStateLiveData.value = data.copy(
                         isLiked = true
@@ -89,6 +93,7 @@ class RestaurantDetailViewModel(
         }
     }
 
+    // 음식점 공유를 위해 음식점 정보를 반환
     fun getRestaurantInfo(): RestaurantEntity? {
         return when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
