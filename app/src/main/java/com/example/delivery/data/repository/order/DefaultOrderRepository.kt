@@ -13,6 +13,7 @@ class DefaultOrderRepository(
     private val firestore: FirebaseFirestore
 ) : OrderRepository {
 
+    // 파이어스토어에 주문내역 저장
     override suspend fun orderMenu(
         userId: String,
         restaurantId: Long,
