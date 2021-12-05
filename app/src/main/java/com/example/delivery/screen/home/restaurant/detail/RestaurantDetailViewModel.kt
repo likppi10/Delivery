@@ -98,6 +98,7 @@ class RestaurantDetailViewModel(
         }
     }
 
+    // 음식점 정보가 잘들어오면 전화번호를 넘겨준다.
     fun getRestaurantPhoneNumber(): String? {
         return when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
