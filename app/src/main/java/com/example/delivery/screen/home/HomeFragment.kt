@@ -199,6 +199,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 else -> Unit
             }
         }
+        // 로그인면 내 화면 탭으로 이동, 비어있으면 장바구니 표시 X
         viewModel.foodMenuBasketLiveData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 binding.basketButtonContainer.isVisible = true

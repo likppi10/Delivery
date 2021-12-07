@@ -64,6 +64,7 @@ class HomeViewModel(
         return null
     }
 
+    // 홈에서 장바구니에 대한 데이터를 갖게하는 메서드
     fun checkMyBasket() = viewModelScope.launch {
         foodMenuBasketLiveData.value = restaurantFoodRepository.getAllFoodMenuListInBasket()
     }

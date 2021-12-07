@@ -57,6 +57,7 @@ class RestaurantDetailViewModel(
         }
     }
 
+    // 장바구니를 비운다.
     fun notifyClearBasket() = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
@@ -69,6 +70,7 @@ class RestaurantDetailViewModel(
         }
     }
 
+    // 장박구니에 담았다.
     fun notifyFoodMenuListInBasket(foodMenu: RestaurantFoodEntity) = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
@@ -82,6 +84,7 @@ class RestaurantDetailViewModel(
         }
     }
 
+    // 다른가게에서 메뉴 담을 때 확인 다이얼로그 띄울때 사용
     fun notifyClearNeedAlertInBasket(isClearNeed: Boolean, afterAction: () -> Unit) = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
