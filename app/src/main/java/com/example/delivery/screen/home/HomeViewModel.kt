@@ -30,6 +30,8 @@ class HomeViewModel(
         locationLatLngEntity: LocationLatLngEntity
     ) = viewModelScope.launch {
         homeStateLiveData.value = HomeState.Loading
+
+        //UserLocation을 가져온다. 가져온게 없으면 현재 위치로
         val userLocation = userRepository.getUserLocation()
         val currentLocation = userLocation ?: locationLatLngEntity
 
@@ -62,6 +64,7 @@ class HomeViewModel(
         return null
     }
 
+    // 홈에서 장바구니에 대한 데이터를 갖게하는 메서드
     fun checkMyBasket() = viewModelScope.launch {
         foodMenuBasketLiveData.value = restaurantFoodRepository.getAllFoodMenuListInBasket()
     }

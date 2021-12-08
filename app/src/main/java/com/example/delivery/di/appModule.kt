@@ -84,6 +84,8 @@ val appModule = module {
     single { provideGsonConverterFactory() }
     single { buildOkHttpClient() }
 
+
+    //qualifier랑 named로 같은 레트로핏임에도 용도를 달리할 것을 명시해준다.
     single(named("map")) { provideMapRetrofit(get(), get()) }
     single(named("food")) { provideFoodRetrofit(get(), get()) }
 
@@ -91,6 +93,7 @@ val appModule = module {
     single { provideMapApiService(get(qualifier = named("map"))) }
     single { provideFoodApiService(get(qualifier = named("food"))) }
 
+    //ProvideDB
     single { provideDB(androidApplication()) }
     single { provideLocationDao(get()) }
     single { provideFoodMenuBasketDao(get()) }

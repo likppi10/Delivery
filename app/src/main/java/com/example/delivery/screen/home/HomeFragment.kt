@@ -56,6 +56,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
+    // 이게 꽤 흥미로운데, changeLocationLauncher가 쓰이는 곳에서 intent한 액티비티에서 전달 받은 값을 가지고 loadReverseGeoInformation를 한번 더함
     private val changeLocationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             result.data?.getParcelableExtra<MapSearchInfoEntity>(MY_LOCATION_KEY)?.let { myLocationInfo ->
@@ -86,6 +87,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
 
     override fun initViews() = with(binding) {
+        // 주소가 표시되어있는 텍스트 클릭하면 위치 재설정 가능
         locationTitleTextView.setOnClickListener {
             viewModel.getMapSearchInfo()?.let { mapInfo ->
                 changeLocationLauncher.launch(
@@ -197,6 +199,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 else -> Unit
             }
         }
+        // 로그인면 내 화면 탭으로 이동, 비어있으면 장바구니 표시 X
         viewModel.foodMenuBasketLiveData.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 binding.basketButtonContainer.isVisible = true
@@ -225,6 +228,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
+        //위치 정보가 잘 확보된 상태여야 탭레이아웃 보여주겠다.
         orderChipGroup.isVisible = true
         if (::viewPagerAdapter.isInitialized.not()) {
             val restaurantCategories = RestaurantCategory.values()
@@ -244,6 +248,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 tab.setText(RestaurantCategory.values()[position].categoryNameId)
             }.attach()
         }
+        //현재 위치정보랑 뷰페이저에 있는 위치정보가 맞지 않다면 재설정
         if (locationLatLng != viewPagerAdapter.locationLatLng) {
             viewPagerAdapter.locationLatLng = locationLatLng
             viewPagerAdapter.fragmentList.forEach {

@@ -60,6 +60,7 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
     private lateinit var viewPagerAdapter: RestaurantDetailListFragmentPagerAdapter
 
     private fun initAppBar() = with(binding) {
+        // 헤더가 스크롤에 따라 비춰지는 모습이 달라지게 함
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val topPadding = 300f.fromDpToPx().toFloat()
             val realAlphaScrollHeight = appBarLayout.measuredHeight - appBarLayout.totalScrollRange

@@ -73,6 +73,7 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
                     handleLoadingState()
                 }
                 is MyLocationState.Success -> {
+                    //맵이 초기화가 되어야지만
                     if (::map.isInitialized) {
                         handleSuccessState(it)
                     }
@@ -97,6 +98,7 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
         val mapSearchInfo = state.mapSearchInfoEntity
         locationLoading.isGone = true
         locationTitleTextView.text = mapSearchInfo.fullAddress
+        //맵이 적절하게 초기화됬는지 판단
         if (isMapInitialized.not()) {
             map.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
