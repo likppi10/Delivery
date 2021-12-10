@@ -17,6 +17,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+// 로그인 관리 할 sharedPreference, 주문 내역 불러와 담을 orderRepository,  로그아웃 하면 찜한 음식점 삭제를 위한 userRepository
 class MyViewModel(
     private val appPreferenceManager: AppPreferenceManager,
     private val userRepository: UserRepository,
