@@ -53,6 +53,7 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
+    // 주문내역 내열을 위한 리사이클러뷰 어댑터
     private val adapter by lazy {
         ModelRecyclerAdapter<OrderModel, MyViewModel>(listOf(), viewModel, adapterListener = object : OrderListListener {
 
