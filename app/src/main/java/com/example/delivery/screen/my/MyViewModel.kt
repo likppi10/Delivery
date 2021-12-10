@@ -34,6 +34,7 @@ class MyViewModel(
         }
     }
 
+    // 로그인 하면 아이디 토큰 저장
     fun saveToken(idToken: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             appPreferenceManager.putIdToken(idToken)
@@ -41,6 +42,8 @@ class MyViewModel(
         }
     }
 
+    //유저 정보 설정
+    // UID 기반으로 getAllOrderMenus로 모든 주문 불러와서  Success / Error 구분
     @Suppress("UNCHECKED_CAST")
     fun setUserInfo(firebaseUser: FirebaseUser?) = viewModelScope.launch {
         firebaseUser?.let { user ->

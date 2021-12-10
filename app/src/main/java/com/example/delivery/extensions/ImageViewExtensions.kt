@@ -14,6 +14,7 @@ private val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(tru
 
 fun ImageView.clear() = Glide.with(context).clear(this)
 
+// 원형 = 60f
 fun ImageView.load(url: String, corner: Float = 0f, scaleType: Transformation<Bitmap> = CenterInside()) {
     Glide.with(this)
         .load(url)
