@@ -15,6 +15,7 @@ import com.example.delivery.widget.adapter.ImageViewPagerAdapter
 import java.io.File
 import java.io.FileNotFoundException
 
+// 찍은 사진들 뷰페이져로
 class ImagePreviewListActivity : AppCompatActivity() {
 
     companion object {
