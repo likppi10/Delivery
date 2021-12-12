@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/drawable-v24/bg_chip_state_list.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/activity_image_preview_list.xml" value="0.31197916666666664" />
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/activity_my_location.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/activity_restaurant_detail.xml" value="0.2046875" />
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/fragment_home.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/viewholder_food_menu.xml" value="0.30625" />
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/viewholder_image.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/viewholder_photo_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/layout/viewholder_restaurant.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/SSAFY/AndroidStudioProjects/Delivery/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Delivery/app/src/main/res/drawable-v24/bg_frame_gallery.xml" value="0.26564102564102565" />

@@ -86,6 +86,7 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
             showProgress()
 
             // 중간에 이미지가 있으면 업로드 과정을 추가
+            // 파이어스리지에 이미지 추가하는 작업 후에 uploadArticle
             if (imageUriList.isNotEmpty()) {
                 lifecycleScope.launch {
                     val results = uploadPhoto(imageUriList)

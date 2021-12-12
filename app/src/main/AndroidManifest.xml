@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
-
     <application
         android:name=".DeliveryApplication"
         android:allowBackup="true"
@@ -19,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Delivery">
         <activity
-            android:name=".screen.MainActivity"
+            android:name=".screen.MainActivity" android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,19 +27,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".screen.mylocation.MyLocationActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:exported="true"/>
         <activity android:name=".screen.home.restaurant.detail.RestaurantDetailActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:exported="true"/>
         <activity android:name=".screen.order.OrderMenuListActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:exported="true"/>
         <activity android:name=".screen.review.camera.preview.ImagePreviewListActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:exported="true"/>
         <activity android:name=".screen.review.camera.CameraActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:exported="true"/>
         <activity android:name=".screen.review.gallery.GalleryActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:exported="true"/>
         <activity android:name=".screen.review.AddRestaurantReviewActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" android:exported="true"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

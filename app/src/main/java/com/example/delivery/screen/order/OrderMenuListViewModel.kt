@@ -21,6 +21,7 @@ class OrderMenuListViewModel(
 
     val orderMenuState = MutableLiveData<OrderMenuState>(OrderMenuState.Uninitialized)
 
+    // OrderMenuState의 foodModel과 다른 것은 같은 foodModel이지만 여기서는 32번째 줄 같이 ORDER_FOOD_CELL을 쓸 것이다.
     override fun fetchData(): Job = viewModelScope.launch {
         orderMenuState.value = OrderMenuState.Loading
         val foodMenuList = restaurantFoodRepository.getAllFoodMenuListInBasket()
@@ -41,21 +42,27 @@ class OrderMenuListViewModel(
         )
     }
 
+    // 항목 삭제
     fun removeOrderMenu(foodModel: FoodModel) = viewModelScope.launch {
         restaurantFoodRepository.removeFoodMenuListInBasket(foodModel.foodId)
         fetchData()
     }
 
+    // 주문 취소
     fun clearOrderMenu() = viewModelScope.launch {
         restaurantFoodRepository.clearFoodMenuListInBasket()
         fetchData()
     }
 
+    // 주문하기
     fun orderMenu() = viewModelScope.launch {
+        // 장바구니에 있는 데이터 가져오기
         val foodMenuList = restaurantFoodRepository.getAllFoodMenuListInBasket()
         if (foodMenuList.isNotEmpty()) {
+            // 음식점 아이디 값
             val restaurantId = foodMenuList.first().restaurantId
             val restaurantTitle = foodMenuList.first().restaurantTitle
+            // 로그인 되어있다면 주문성공하면 바구니 비우기 실패하면 에러문 출력
             firebaseAuth.currentUser?.let { user ->
                 when (val data = orderRepository.orderMenu(user.uid, restaurantId, foodMenuList, restaurantTitle)) {
                     is DefaultOrderRepository.Result.Success<*> -> {

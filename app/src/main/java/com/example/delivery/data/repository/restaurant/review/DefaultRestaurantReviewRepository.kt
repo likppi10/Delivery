@@ -11,6 +11,7 @@ class DefaultRestaurantReviewRepository(
     private val firestore: FirebaseFirestore
 ): RestaurantReviewRepository {
 
+    // Mock 데이터를 파이어스토어와 스토리지의 데이터를 가져오는 것으로 바꾼것
     @Suppress("UNCHECKED_CAST")
     override suspend fun getReviews(restaurantTitle: String): Result = withContext(ioDispatcher) {
         /*return@withContext (0..10).map {

@@ -27,14 +27,14 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
 
     override fun getViewBinding(): FragmentMyBinding = FragmentMyBinding.inflate(layoutInflater)
 
-//    private val gso: GoogleSignInOptions by lazy {
-//        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestIdToken(getString(R.string.default_web_client_id))
-//            .requestEmail()
-//            .build()
-//    }
+    private val gso: GoogleSignInOptions by lazy {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+    }
 
-   // private val gsc by lazy { GoogleSignIn.getClient(requireActivity(), gso) }
+    private val gsc by lazy { GoogleSignIn.getClient(requireActivity(), gso) }
 
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
@@ -53,6 +53,7 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
+    // 주문내역 내열을 위한 리사이클러뷰 어댑터
     private val adapter by lazy {
         ModelRecyclerAdapter<OrderModel, MyViewModel>(listOf(), viewModel, adapterListener = object : OrderListListener {
 
@@ -88,8 +89,8 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
     }
 
     private fun signInGoogle() {
-        // val signInIntent = gsc.signInIntent
-        //loginLauncher.launch(signInIntent)
+        val signInIntent = gsc.signInIntent
+        loginLauncher.launch(signInIntent)
     }
 
     override fun observeData() = viewModel.myStateLiveData.observe(this) {
@@ -102,11 +103,13 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
+    //로딩 됬을 때
     private fun handleLoadingState() = with(binding) {
         progressBar.isVisible = true
         loginRequiredGroup.isGone = true
     }
 
+    // 완료되었을 때 가입했냐 안했냐에 따라 다름
     private fun handleSuccessState(state: MyState.Success) = with(binding) {
         progressBar.isGone = true
         when (state) {

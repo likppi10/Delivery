@@ -54,6 +54,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), BottomN
         }
     }
 
+    // 장바구니 ㅋ버튼 눌렀을 때 로그인 상태아니면 마이페이지 탭으로 이동 시켜주기 위한 조치
     fun goToTab(mainTabMenu: MainTabMenu) {
         binding.bottomNav.selectedItemId = mainTabMenu.menuId
     }

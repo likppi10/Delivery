@@ -13,6 +13,7 @@ class DefaultOrderRepository(
     private val firestore: FirebaseFirestore
 ) : OrderRepository {
 
+    // 파이어스토어에 주문내역 저장
     override suspend fun orderMenu(
         userId: String,
         restaurantId: Long,
@@ -38,6 +39,8 @@ class DefaultOrderRepository(
         return@withContext result
     }
 
+
+    //로그인 하면 주문내역을 모두 가져온다.
     override suspend fun getAllOrderMenus(userId: String): Result = withContext(ioDispatcher) {
         return@withContext try {
             val result: QuerySnapshot = firestore
