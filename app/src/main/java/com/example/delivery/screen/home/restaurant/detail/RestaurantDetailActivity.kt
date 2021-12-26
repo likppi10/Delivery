@@ -75,6 +75,9 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
             val percentage = realAlphaVerticalOffset / realAlphaScrollHeight
             restaurantTitleTextView.alpha = 1 - (if (1 - percentage * 2 < 0) 0f else 1 - percentage * 2)
         })
+
+        /* 1-2-2. 가게 상세 : 전화, 찜, 공유
+        */
         toolbar.setNavigationOnClickListener {
             finish()
         }
