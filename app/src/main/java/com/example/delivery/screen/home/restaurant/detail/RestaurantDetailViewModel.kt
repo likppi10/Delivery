@@ -35,6 +35,9 @@ class RestaurantDetailViewModel(
         )
     }
 
+    /* 1-2-2. 가게 상세 : 전화, 찜, 공유
+    * 찜 선택했다가 안했다가 토글
+    */
     fun toggleLikedRestaurant() = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
@@ -57,7 +60,9 @@ class RestaurantDetailViewModel(
         }
     }
 
-    // 장바구니를 비운다.
+    /* 1-2-1. 장바구니
+    * 장바구니를 비운다.
+    */
     fun notifyClearBasket() = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
@@ -70,7 +75,10 @@ class RestaurantDetailViewModel(
         }
     }
 
-    // 장박구니에 담았다.
+
+    /* 1-2-1. 장바구니
+    * 장바구니에 담았다.
+    */
     fun notifyFoodMenuListInBasket(foodMenu: RestaurantFoodEntity) = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
@@ -84,7 +92,9 @@ class RestaurantDetailViewModel(
         }
     }
 
-    // 다른가게에서 메뉴 담을 때 확인 다이얼로그 띄울때 사용
+    /* 1-2-1. 장바구니
+    * 다른가게에서 메뉴 담을 때 확인 다이얼로그 띄울때 사용
+    */
     fun notifyClearNeedAlertInBasket(isClearNeed: Boolean, afterAction: () -> Unit) = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {
@@ -96,6 +106,9 @@ class RestaurantDetailViewModel(
         }
     }
 
+    /* 1-2-2. 가게 상세 : 전화, 찜, 공유
+    * 음식점 정보 공유
+    */
     // 음식점 공유를 위해 음식점 정보를 반환
     fun getRestaurantInfo(): RestaurantEntity? {
         return when (val data = restaurantDetailStateLiveData.value) {
@@ -106,6 +119,9 @@ class RestaurantDetailViewModel(
         }
     }
 
+    /* 1-2-2. 가게 상세 : 전화, 찜, 공유
+    * 전화번호 가져오기
+    */
     // 음식점 정보가 잘들어오면 전화번호를 넘겨준다.
     fun getRestaurantPhoneNumber(): String? {
         return when (val data = restaurantDetailStateLiveData.value) {
@@ -116,6 +132,9 @@ class RestaurantDetailViewModel(
         }
     }
 
+    /* 1-2-1. 장바구니
+    * 장바구니를 불러왔다.
+    */
     fun checkMyBasket() = viewModelScope.launch {
         when (val data = restaurantDetailStateLiveData.value) {
             is RestaurantDetailState.Success -> {

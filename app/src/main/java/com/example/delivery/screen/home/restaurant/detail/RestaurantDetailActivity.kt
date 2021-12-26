@@ -128,6 +128,9 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         progressBar.isVisible = true
     }
 
+    /* 1-2-2. 가게 상세 : 전화, 찜, 공유
+    * 가게 상세 정보 표시
+    */
     private fun handleSuccess(state: RestaurantDetailState.Success) = with(binding) {
         progressBar.isGone = true
 
@@ -187,6 +190,10 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
 
     }
 
+    /* 1-2-1. 장바구니
+    * 장바구니의 메뉴 개수
+    * 로그인이 필요하다.
+    */
     private fun notifyBasketCount(foodMenuListInBasket: List<RestaurantFoodEntity>?) = with(binding) {
         basketCountTextView.text = if (foodMenuListInBasket.isNullOrEmpty()) {
             "0"
@@ -213,6 +220,9 @@ class RestaurantDetailActivity : BaseActivity<RestaurantDetailViewModel, Activit
         }
     }
 
+    /* 1-2-1. 장바구니
+    * 장바구니 접근 시 로그인 필요
+    */
     private fun alertLoginNeed(afterAction: () -> Unit) {
         AlertDialog.Builder(this)
             .setTitle("로그인이 필요합니다.")
