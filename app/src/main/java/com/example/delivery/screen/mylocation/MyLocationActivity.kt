@@ -79,6 +79,9 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
                     }
                 }
                 is MyLocationState.Confirm -> {
+                    /* 1-1. 위치 정보 : 위치 정보 감지 및 주변 가게
+                    * 마커가 가르키는 곳을 현재 위치로 변경
+                    */
                     setResult(Activity.RESULT_OK, Intent().apply {
                         putExtra(HomeViewModel.MY_LOCATION_KEY, it.mapSearchInfoEntity)
                     })
@@ -94,6 +97,11 @@ class MyLocationActivity : BaseActivity<MyLocationViewModel, ActivityMyLocationB
         locationTitleTextView.text = getString(R.string.loading)
     }
 
+    /* 1-1. 위치 정보 : 위치 정보 감지 및 주변 가게
+     * 맵이 초기화가 됬으면,
+     * 현재위치를 비추는 멥을 구현하고,
+     * 옮긴 위치가 있다면,
+    */
     private fun handleSuccessState(state: MyLocationState.Success) = with(binding) {
         val mapSearchInfo = state.mapSearchInfoEntity
         locationLoading.isGone = true

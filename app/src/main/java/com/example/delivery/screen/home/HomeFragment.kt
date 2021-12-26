@@ -65,6 +65,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
+    /* 1-1. 위치 정보 : 위치 정보 감지 및 주변 가게
+     * 위치 접근 권한 요청 런처
+    */
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             // 받은 권한
@@ -79,6 +82,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 with(binding.locationTitleTextView) {
                     text = getString(R.string.please_request_location_permission)
                     setOnClickListener {
+                        /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+                        * 권한 허용 후 위치정보를 가져온다.
+                        */
                         getMyLocation()
                     }
                 }
@@ -87,7 +93,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
 
     override fun initViews() = with(binding) {
-        // 주소가 표시되어있는 텍스트 클릭하면 위치 재설정 가능
+
+        /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+        *  주소가 표시되어있는 텍스트 클릭하면 위치 재설정 가능
+        */
         locationTitleTextView.setOnClickListener {
             viewModel.getMapSearchInfo()?.let { mapInfo ->
                 changeLocationLauncher.launch(
@@ -150,6 +159,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
         //GPS 켜져있는지 확인
         val isGpsEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+        * 위치 접근 권한 요청
+        */
         if (isGpsEnable) {
             locationPermissionLauncher.launch(locationPermissions)
         }
@@ -179,6 +192,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         viewModel.homeStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is HomeState.Uninitialized -> {
+                    /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+                    * 아직 초기화 되지 않았을 때
+                    */
                     getMyLocation()
                 }
                 is HomeState.Loading -> {
@@ -263,6 +279,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
+    /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+    * HomeViewModel로 위치정보 전송
+    */
     inner class MyLocationListener : LocationListener {
 
         override fun onLocationChanged(location: Location) {
