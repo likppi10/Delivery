@@ -25,6 +25,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), BottomN
 
     private val menuChangeEventBus by inject<MenuChangeEventBus>()
 
+
+    /* 0-1.
+    * 주입 받은 menuChangeEventBus로 fragmentContainer를 바꿔 준다.
+    */
     override fun initState() {
         super.initState()
         lifecycleScope.launch {
@@ -54,11 +58,15 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), BottomN
         }
     }
 
-    // 장바구니 ㅋ버튼 눌렀을 때 로그인 상태아니면 마이페이지 탭으로 이동 시켜주기 위한 조치
+    // 장바구니 버튼 눌렀을 때 로그인 상태 아니면 마이페이지 탭으로 이동 시켜주기 위한 조치
     fun goToTab(mainTabMenu: MainTabMenu) {
         binding.bottomNav.selectedItemId = mainTabMenu.menuId
     }
 
+    /* 0-1.
+    * 선택한 프레그먼트 태그로 프레그먼트를 식별하고, 화면에서 프레그먼트들을 전부 숨기고,
+    * 선택한 프레그먼트만 보여준다.
+    */
     private fun showFragment(fragment: Fragment, tag: String) {
         val findFragment = supportFragmentManager.findFragmentByTag(tag)
         supportFragmentManager.fragments.forEach { fm ->

@@ -104,6 +104,7 @@ val appModule = module {
     single<ResourcesProvider> { DefaultResourcesProvider(androidApplication()) }
     single { AppPreferenceManager(androidContext()) }
 
+    // 메뉴가 바뀌었음을 알려주는 이벤트 감지
     single { MenuChangeEventBus() }
 
     //Coroutine에 필요한 요소
