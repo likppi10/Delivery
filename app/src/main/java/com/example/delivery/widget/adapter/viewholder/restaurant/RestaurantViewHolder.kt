@@ -21,6 +21,9 @@ class RestaurantViewHolder(
         restaurantImage.clear()
     }
 
+    /* 1-2. 가게 나열 : 클릭하면 "가게 상세" 이동 및 가게 필터링
+    *  가게 정보 표시
+    */
     override fun bindData(model: RestaurantModel) {
         super.bindData(model)
         with(binding) {
