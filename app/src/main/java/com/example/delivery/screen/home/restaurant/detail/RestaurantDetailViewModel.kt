@@ -92,7 +92,7 @@ class RestaurantDetailViewModel(
         }
     }
 
-    /* 1-2-1. 장바구니
+    /* 1-2-2-1. 메뉴 나열 : 클릭하면 장바구니에 담기
     * 다른가게에서 메뉴 담을 때 확인 다이얼로그 띄울때 사용
     */
     fun notifyClearNeedAlertInBasket(isClearNeed: Boolean, afterAction: () -> Unit) = viewModelScope.launch {

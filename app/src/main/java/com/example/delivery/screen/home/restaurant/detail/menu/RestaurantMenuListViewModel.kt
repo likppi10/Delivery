@@ -36,6 +36,10 @@ class RestaurantMenuListViewModel(
         }
     }
 
+    /* 1-2-2-1. 메뉴 나열 : 클릭하면 장바구니에 담기
+    * 장바구니에 메뉴 담기
+    * anotherRestaurantMenuListInBasket에 다른 가게 음식이 있는지 담아서
+    */
     fun insertMenuInBasket(foodModel: FoodModel) = viewModelScope.launch {
         val restaurantMenuListInBasket = restaurantFoodRepository.getFoodMenuListInBasket(restaurantId)
         val foodMenuEntity = foodModel.toEntity(restaurantMenuListInBasket.size)
@@ -49,6 +53,9 @@ class RestaurantMenuListViewModel(
         }
     }
 
+    /* 1-2-2-1. 메뉴 나열 : 클릭하면 장바구니에 담기
+    * 다른 가게 메뉴가 있으므로 장바구니를 비우고 새로 담는다.
+    */
     private fun clearMenuAndInsertNewMenuInBasket(foodMenuEntity: RestaurantFoodEntity) = viewModelScope.launch {
         restaurantFoodRepository.clearFoodMenuListInBasket()
         restaurantFoodRepository.insertFoodMenuInBasket(foodMenuEntity)
