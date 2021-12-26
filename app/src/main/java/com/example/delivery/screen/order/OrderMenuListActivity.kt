@@ -22,6 +22,11 @@ class OrderMenuListActivity : BaseActivity<OrderMenuListViewModel, ActivityOrder
         fun newIntent(context: Context) = Intent(context, OrderMenuListActivity::class.java)
     }
 
+    /* 1-2-1. 장바구니 :
+    메뉴 나열 : 담는 정보는 "가게 상세"의 메뉴 나열과 같음
+	주문하기 : 장바구니 클리어, 주문완료
+    *  장바구니의 아이템이 클릭됐을 경우 장바구니에서 삭제된다.
+    */
     private val adapter by lazy {
         ModelRecyclerAdapter<FoodModel, OrderMenuListViewModel>(listOf(), viewModel, adapterListener = object : OrderMenuListListener {
             override fun onRemoveItem(model: FoodModel) {
@@ -49,6 +54,11 @@ class OrderMenuListActivity : BaseActivity<OrderMenuListViewModel, ActivityOrder
             is OrderMenuState.Success -> {
                 handleSuccessState(it)
             }
+            /* 1-2-1. 장바구니 :
+            메뉴 나열 : 담는 정보는 "가게 상세"의 메뉴 나열과 같음
+	        주문하기 : 장바구니 클리어, 주문완료
+            *  주문하기를 누른다.
+            */
             is OrderMenuState.Order -> {
                 handleOrderState()
             }
@@ -70,6 +80,11 @@ class OrderMenuListActivity : BaseActivity<OrderMenuListViewModel, ActivityOrder
         }
     }
 
+    /* 1-2-1. 장바구니 :
+    메뉴 나열 : 담는 정보는 "가게 상세"의 메뉴 나열과 같음
+	주문하기 : 장바구니 클리어, 주문완료
+    *  주문 완료 후 장바구니 페이지를 닫는다.
+    */
     private fun handleOrderState() {
         Toast.makeText(this, "성공적으로 주문을 완료하였습니다.", Toast.LENGTH_SHORT).show()
         finish()
