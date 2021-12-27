@@ -6,6 +6,10 @@ import android.content.SharedPreferences
 /**
  * 데이터 저장 및 로드 클래스
  */
+/* 3. 내정보 탭
+      3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  유저의 로그인 기록을 SHAREDpREFERENCE로 가지고 있는다.
+    */
 // sharedPreference로 회원의 로그인 상태를 관리한다.
 class AppPreferenceManager(
     private val context: Context

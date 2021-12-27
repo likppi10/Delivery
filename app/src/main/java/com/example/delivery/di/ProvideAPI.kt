@@ -12,7 +12,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-//2
+/* 4. 기본 설정 및 data :
+*  통신에 관련된 기능들
+*/
 fun provideMapApiService(retrofit: Retrofit): MapApiService {
     return retrofit.create(MapApiService::class.java)
 }
@@ -21,6 +23,9 @@ fun provideFoodApiService(retrofit: Retrofit): FoodApiService {
     return retrofit.create(FoodApiService::class.java)
 }
 
+/* 4. 기본 설정 및 data :
+*  지도와 음식을 가져오는 통신
+*/
 fun provideMapRetrofit(
     okHttpClient: OkHttpClient,
     gsonConverterFactory: GsonConverterFactory,
