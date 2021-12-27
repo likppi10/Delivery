@@ -47,6 +47,11 @@ import org.koin.dsl.module
 
 val appModule = module {
 
+    /* 4. 기본 설정 및 data :
+    *  어플리케이션이 실행되면 생성된다.
+    *  viewmodel, Repository, DB, ResourceProvider, MenuChangeBus, Coroutine, FireBase 관련 설정들이 있다.
+    */
+
     // 메인 액티비티와 하단 탭 화면에서 쓰는 뷰모델
     viewModel { MainViewModel() }
     viewModel { HomeViewModel(get(), get(), get()) }
@@ -104,6 +109,7 @@ val appModule = module {
     single<ResourcesProvider> { DefaultResourcesProvider(androidApplication()) }
     single { AppPreferenceManager(androidContext()) }
 
+    // 메뉴가 바뀌었음을 알려주는 이벤트 감지
     single { MenuChangeEventBus() }
 
     //Coroutine에 필요한 요소

@@ -35,7 +35,10 @@ class MyViewModel(
         }
     }
 
-    // 로그인 하면 아이디 토큰 저장
+    /* 3. 내정보 탭
+      3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  로그인 후 사용자 토큰 정보를 저장
+    */
     fun saveToken(idToken: String) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             appPreferenceManager.putIdToken(idToken)
@@ -43,8 +46,11 @@ class MyViewModel(
         }
     }
 
-    //유저 정보 설정
-    // UID 기반으로 getAllOrderMenus로 모든 주문 불러와서  Success / Error 구분
+    /* 3. 내정보 탭
+      3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  유저 정보 설정
+    *  UID 기반으로 getAllOrderMenus로 모든 주문 불러와서  Success / Error 구분
+    */
     @Suppress("UNCHECKED_CAST")
     fun setUserInfo(firebaseUser: FirebaseUser?) = viewModelScope.launch {
         firebaseUser?.let { user ->
@@ -80,6 +86,10 @@ class MyViewModel(
         }
     }
 
+    /* 3. 내정보 탭
+      3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  로그아웃
+    */
     fun signOut() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
             appPreferenceManager.removeIdToken()

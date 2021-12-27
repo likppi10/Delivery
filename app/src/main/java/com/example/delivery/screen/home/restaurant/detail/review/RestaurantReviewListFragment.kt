@@ -19,6 +19,9 @@ class RestaurantReviewListFragment : BaseFragment<RestaurantReviewListViewModel,
         )
     }
 
+    /* 1-2-2-2. 리뷰 나열 : 해당 가게 리뷰 나열
+    * 어댑터 연결
+    */
     private val adapter by lazy {
         ModelRecyclerAdapter<RestaurantReviewModel, RestaurantReviewListViewModel>(
             listOf(), viewModel, adapterListener = object : AdapterListener { }

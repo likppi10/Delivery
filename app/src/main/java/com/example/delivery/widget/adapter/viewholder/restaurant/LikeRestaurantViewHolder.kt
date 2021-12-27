@@ -21,6 +21,10 @@ class LikeRestaurantViewHolder(
         restaurantImage.clear()
     }
 
+    /* 2. 찜 탭
+        찜 가게 나열 : 클릭하면 해당 "가게 상세"로 이동
+    *  찜한 가게 정보 표시
+    */
     override fun bindData(model: RestaurantModel) {
         super.bindData(model)
         with(binding) {

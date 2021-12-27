@@ -55,6 +55,9 @@ class HomeViewModel(
         }
     }
 
+    /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+    * 상태가 성공이면(받아온 위치 정보가 있으면으로 해석 가능) 위치정보 반환
+    */
     fun getMapSearchInfo(): MapSearchInfoEntity? {
         when (val data = homeStateLiveData.value) {
             is HomeState.Success -> {

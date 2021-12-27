@@ -22,6 +22,9 @@ class FoodMenuViewHolder(
         foodImage.clear()
     }
 
+    /* 1-2-2-1. 메뉴 나열 : 클릭하면 장바구니에 담기
+    * 메뉴 정보 표시
+    */
     override fun bindData(model: FoodModel) {
         super.bindData(model)
         with(binding) {

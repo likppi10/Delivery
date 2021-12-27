@@ -42,19 +42,33 @@ class OrderMenuListViewModel(
         )
     }
 
-    // 항목 삭제
+    /* 1-2-1. 장바구니 :
+    메뉴 나열 : 담는 정보는 "가게 상세"의 메뉴 나열과 같음
+	주문하기 : 장바구니 클리어, 주문완료
+    *  장바구니의 아이템이 클릭됐을 경우 장바구니에서 삭제된다.
+    */
     fun removeOrderMenu(foodModel: FoodModel) = viewModelScope.launch {
         restaurantFoodRepository.removeFoodMenuListInBasket(foodModel.foodId)
         fetchData()
     }
 
-    // 주문 취소
+    /* 1-2-1. 장바구니 :
+    메뉴 나열 : 담는 정보는 "가게 상세"의 메뉴 나열과 같음
+	주문하기 : 장바구니 클리어, 주문완료
+    *  클릭하면 장바구니가 비워진다.
+    */
     fun clearOrderMenu() = viewModelScope.launch {
         restaurantFoodRepository.clearFoodMenuListInBasket()
         fetchData()
     }
 
-    // 주문하기
+    /* 1-2-1. 장바구니 :
+    메뉴 나열 : 담는 정보는 "가게 상세"의 메뉴 나열과 같음
+	주문하기 : 장바구니 클리어, 주문완료
+    * 장바구니에 뭔가 들어있다면,
+    * 로그인이 되어있다면,
+    * 주문 시도
+    */
     fun orderMenu() = viewModelScope.launch {
         // 장바구니에 있는 데이터 가져오기
         val foodMenuList = restaurantFoodRepository.getAllFoodMenuListInBasket()

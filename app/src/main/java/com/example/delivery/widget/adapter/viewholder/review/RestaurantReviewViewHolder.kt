@@ -22,6 +22,9 @@ class RestaurantReviewViewHolder(
         reviewThumbnailImage.isGone = true
     }
 
+    /* 1-2-2-2. 리뷰 나열 : 해당 가게 리뷰 나열
+    * 리뷰 정보 표시
+    */
     override fun bindData(model: RestaurantReviewModel) {
         super.bindData(model)
         with(binding) {

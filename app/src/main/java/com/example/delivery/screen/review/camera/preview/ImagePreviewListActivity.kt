@@ -43,6 +43,10 @@ class ImagePreviewListActivity : AppCompatActivity() {
         setupImageList(uriList)
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  촬영한 이미지들로 리스트를 만든다.
+    */
     private fun setupImageList(uriList: List<Uri>) = with(binding) {
         if (::imageViewPagerAdapter.isInitialized.not()) {
             imageViewPagerAdapter = ImageViewPagerAdapter(uriList)
@@ -66,6 +70,10 @@ class ImagePreviewListActivity : AppCompatActivity() {
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  찍은 사진들 중 클릭하여 삭제
+    */
     private fun removeImage(uri: Uri) {
         val file = File(PathUtil.getPath(this, uri) ?: throw FileNotFoundException())
         file.delete()

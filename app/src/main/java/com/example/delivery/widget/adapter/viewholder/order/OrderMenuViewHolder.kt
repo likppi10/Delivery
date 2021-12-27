@@ -22,6 +22,11 @@ class OrderMenuViewHolder(
         foodImage.clear()
     }
 
+    /* 1-2-1. 장바구니 :
+    메뉴 나열 : 담는 정보는 "가게 상세"의 메뉴 나열과 같음
+	주문하기 : 장바구니 클리어, 주문완료
+    *  장바구니에 있는 메뉴의 정보 표시
+    */
     override fun bindData(model: FoodModel) {
         super.bindData(model)
         with(binding) {

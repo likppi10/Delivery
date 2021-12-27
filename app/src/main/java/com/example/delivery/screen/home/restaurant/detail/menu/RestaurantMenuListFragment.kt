@@ -25,6 +25,9 @@ class RestaurantMenuListFragment : BaseFragment<RestaurantMenuListViewModel, Fra
 
     private val restaurantDetailViewModel by sharedViewModel<RestaurantDetailViewModel>()
 
+    /* 1-2-2-1. 메뉴 나열 : 클릭하면 장바구니에 담기
+    * 클릭 시 장바구니에 메뉴 담기
+    */
     private val adapter by lazy {
         ModelRecyclerAdapter<FoodModel, RestaurantMenuListViewModel>(listOf(), viewModel, adapterListener = object : FoodMenuListListener {
             override fun onClickItem(model: FoodModel) {
@@ -45,6 +48,9 @@ class RestaurantMenuListFragment : BaseFragment<RestaurantMenuListViewModel, Fra
             Toast.makeText(requireContext(), "장바구니에 담겼습니다. 메뉴 : ${it.title}", Toast.LENGTH_SHORT).show()
             restaurantDetailViewModel.notifyFoodMenuListInBasket(it)
         }
+        /* 1-2-2-1. 메뉴 나열 : 클릭하면 장바구니에 담기
+        * restaurantDetailViewModel에 다른 가게 메뉴가 있는지 없는지 알려준다.
+        */
         viewModel.isClearNeedInBasketLiveData.observe(viewLifecycleOwner) { (isClearNeed, afterAction) ->
             if (isClearNeed) {
                 restaurantDetailViewModel.notifyClearNeedAlertInBasket(isClearNeed, afterAction)

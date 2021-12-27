@@ -22,7 +22,9 @@ class RestaurantListFragment : BaseFragment<RestaurantListViewModel, FragmentLis
 
     private val adapter by lazy {
         ModelRecyclerAdapter<RestaurantModel, RestaurantListViewModel>(listOf(), viewModel, adapterListener = object : RestaurantListListener {
-            // 매장 리스트중에서 한 아이템이 클리되었을 경우
+            /* 1-2. 가게 나열 : 클릭하면 "가게 상세" 이동 및 가게 필터링
+            *  매장 리스트중에서 한 아이템이 클릭되었을 경우 "가게 상세"로 이동한다.
+            */
             override fun onClickItem(model: RestaurantModel) {
                 startActivity(
                     RestaurantDetailActivity.newIntent(requireContext(), model.toEntity())

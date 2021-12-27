@@ -28,6 +28,8 @@ object ModelViewHolderMapper {
         viewModel: BaseViewModel,
         resourcesProvider: ResourcesProvider
     ): ModelViewHolder<M> {
+
+        // CellType에 따른 viewHolder 분기 기준은 CellType에 적어놓았다.
         val inflater = LayoutInflater.from(parent.context)
         val viewHolder = when (type) {
             CellType.RESTAURANT_CELL ->

@@ -25,6 +25,10 @@ class GalleryViewModel(
         )
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  이미지 선택 or 취소
+    */
     fun selectPhoto(galleryPhoto: GalleryPhoto) {
         val findGalleryPhoto = photoList.find { it.id == galleryPhoto.id }
         findGalleryPhoto?.let { photo ->
@@ -40,6 +44,10 @@ class GalleryViewModel(
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  선택한 이미지들로 결정
+    */
     fun confirmCheckedPhotos() {
         setState(
             GalleryState.Loading

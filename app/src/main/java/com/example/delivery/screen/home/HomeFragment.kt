@@ -65,6 +65,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
+    /* 1-1. 위치 정보 : 위치 정보 감지 및 주변 가게
+     * 위치 접근 권한 요청 런처
+    */
     private val locationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             // 받은 권한
@@ -79,6 +82,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 with(binding.locationTitleTextView) {
                     text = getString(R.string.please_request_location_permission)
                     setOnClickListener {
+                        /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+                        * 권한 허용 후 위치정보를 가져온다.
+                        */
                         getMyLocation()
                     }
                 }
@@ -87,7 +93,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
 
     override fun initViews() = with(binding) {
-        // 주소가 표시되어있는 텍스트 클릭하면 위치 재설정 가능
+
+        /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+        *  주소가 표시되어있는 텍스트 클릭하면 위치 재설정 가능
+        */
         locationTitleTextView.setOnClickListener {
             viewModel.getMapSearchInfo()?.let { mapInfo ->
                 changeLocationLauncher.launch(
@@ -97,6 +106,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
                 )
             }
         }
+
+        /* 1-2. 가게 나열 : 클릭하면 "가게 상세" 이동 및 가게 필터링
+        *  필터링 칩을 클릭하여 가게 나열 방식 변경
+        */
         orderChipGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.chipDefault -> {
@@ -137,6 +150,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             .show()
     }
 
+    /* 1-2. 가게 나열 : 클릭하면 "가게 상세" 이동 및 가게 필터링
+    *  클릭한 칩 방식으로 가게 나열 방식 변경
+    */
     private fun changeRestaurantFilterOrder(order: RestautantFilterOrder) {
         viewPagerAdapter.fragmentList.forEach {
             it.viewModel.setRestaurantFilterOrder(order)
@@ -150,6 +166,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
         //GPS 켜져있는지 확인
         val isGpsEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+
+        /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+        * 위치 접근 권한 요청
+        */
         if (isGpsEnable) {
             locationPermissionLauncher.launch(locationPermissions)
         }
@@ -179,6 +199,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         viewModel.homeStateLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is HomeState.Uninitialized -> {
+                    /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+                    * 아직 초기화 되지 않았을 때
+                    */
                     getMyLocation()
                 }
                 is HomeState.Loading -> {
@@ -228,6 +251,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun initViewPager(locationLatLng: LocationLatLngEntity) = with(binding) {
+
+        /* 1-2. 가게 나열 : 클릭하면 "가게 상세" 이동 및 가게 필터링
+        *  카테고리를 받아와서, 그에 따라 위치기반의 가게 정보를 나열한다.
+        */
         //위치 정보가 잘 확보된 상태여야 탭레이아웃 보여주겠다.
         orderChipGroup.isVisible = true
         if (::viewPagerAdapter.isInitialized.not()) {
@@ -263,6 +290,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
     }
 
+    /* 1-1. 위치 정보 : 위치 정보 감지 및 재설정
+    * HomeViewModel로 위치정보 전송
+    */
     inner class MyLocationListener : LocationListener {
 
         override fun onLocationChanged(location: Location) {

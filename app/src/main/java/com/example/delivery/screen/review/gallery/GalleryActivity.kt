@@ -22,6 +22,10 @@ class GalleryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGalleryBinding
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  리뷰 등록, 이미지의 유무에 따라 분기 처리
+    */
     private val adapter = GalleryPhotoListAdapter {
         viewModel.selectPhoto(it)
     }
@@ -66,6 +70,10 @@ class GalleryActivity : AppCompatActivity() {
         adapter.setPhotoList(state.photoList)
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  선택한 사진들로 Result를 set한다.
+    */
     private fun handleConfirm(state: GalleryState.Confirm) {
         setResult(Activity.RESULT_OK, Intent().apply {
             putExtra(URI_LIST_KEY, ArrayList(state.photoList.map { it.uri }))
