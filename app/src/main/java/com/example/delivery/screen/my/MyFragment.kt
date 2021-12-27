@@ -38,6 +38,10 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
 
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
+    /* 3. 내정보 탭
+       3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  로그인 런처 생성
+    */
     private val loginLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -53,7 +57,11 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
-    // 주문내역 내열을 위한 리사이클러뷰 어댑터
+    /* 3. 내정보 탭
+     3-3. 주문 내역
+    *  주문내역 내열을 위한 리사이클러뷰 어댑터
+    *  주문 내역 리스트 아이템을 클릭하면 리뷰 작성페이지로 이동한다.
+    */
     private val adapter by lazy {
         ModelRecyclerAdapter<OrderModel, MyViewModel>(listOf(), viewModel, adapterListener = object : OrderListListener {
 
@@ -77,6 +85,12 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
+    /* 3. 내정보 탭
+       3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  로그인 버튼 클릭 시
+    *  로그아웃 버튼 클릭 시
+    *  아직 내 정보 화면을 초기화 하기 전의 상태, 리스너를 생성하여 구현한다.
+    */
     override fun initViews() = with(binding) {
         recyclerView.adapter = adapter
         loginButton.setOnClickListener {
@@ -88,6 +102,10 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
+    /* 3. 내정보 탭
+       3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  구글 로그인 런처 실행
+    */
     private fun signInGoogle() {
         val signInIntent = gsc.signInIntent
         loginLauncher.launch(signInIntent)
@@ -103,13 +121,19 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
-    //로딩 됬을 때
+    /* 3. 내정보 탭
+      3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  리스너 연결 후 로딩 중 구현
+    */
     private fun handleLoadingState() = with(binding) {
         progressBar.isVisible = true
         loginRequiredGroup.isGone = true
     }
 
-    // 완료되었을 때 가입했냐 안했냐에 따라 다름
+    /* 3. 내정보 탭
+      3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  로그인 결과에 따른 분기
+    */
     private fun handleSuccessState(state: MyState.Success) = with(binding) {
         progressBar.isGone = true
         when (state) {
@@ -123,6 +147,10 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
         }
     }
 
+    /* 3. 내정보 탭
+      3-1. 구글 로그인 : 로그인 기록 없을 시 하게 함
+    *  구글 로그인을 파이어베이스의 auth로 진행
+    */
     private fun handleLoginState(state: MyState.Login) = with(binding) {
         binding.progressBar.isVisible = true
         val credential = GoogleAuthProvider.getCredential(state.idToken, null)
@@ -138,6 +166,10 @@ class MyFragment: BaseFragment<MyViewModel, FragmentMyBinding>() {
             }
     }
 
+    /* 3. 내정보 탭
+       3-2. 사용자 정보 :
+    *  로그인 결과가 잘 작동 했을 때, 사용자의 정보를 표시한다.
+    */
     private fun handleRegisteredState(state: MyState.Success.Registered) = with(binding) {
         profileGroup.isVisible = true
         loginRequiredGroup.isGone = true
