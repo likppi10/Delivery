@@ -53,11 +53,17 @@ class RestaurantListViewModel(
         }
     }
 
+    /* 1-2. 가게 나열 : 클릭하면 "가게 상세" 이동 및 가게 필터링
+    *  바뀐 위치로 변경 후 다시 fetch
+    */
     fun setLocationLatLng(locationLatLngEntity: LocationLatLngEntity) {
         this.locationLatLngEntity = locationLatLngEntity
         fetchData()
     }
 
+    /* 1-2. 가게 나열 : 클릭하면 "가게 상세" 이동 및 가게 필터링
+    *  바뀐 필터로 변경 후 다시 fetch
+    */
     fun setRestaurantFilterOrder(order: RestautantFilterOrder) {
         this.restaurantFilterOrder = order
         fetchData()
