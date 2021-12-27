@@ -85,12 +85,20 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  카메라 접근 권한 요청
+    */
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             baseContext, it
         ) == PackageManager.PERMISSION_GRANTED
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  카메라 실행
+    */
     private fun startCamera(viewFinder: PreviewView) {
         displayManager.registerDisplayListener(displayListener, null)
 

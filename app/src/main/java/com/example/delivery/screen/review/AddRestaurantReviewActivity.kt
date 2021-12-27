@@ -67,6 +67,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
     private fun initViews() = with(binding) {
         photoRecyclerView.adapter = photoListAdapter
 
+        /* 3. 내정보 탭
+        3-3-1. 리뷰 작성
+        *  가게 이름, 뒤로 가기 버튼 생성
+        */
         titleTextView.text = restaurantTitle
 
         toolbar.setNavigationOnClickListener {
@@ -77,6 +81,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
             showPictureUploadDialog()
         }
 
+        /* 3. 내정보 탭
+        3-3-1. 리뷰 작성
+        *  리뷰 등록, 이미지의 유무에 따라 분기 처리
+        */
         submitButton.setOnClickListener {
             val title = binding.titleEditText.text.toString()
             val content = binding.contentEditText.text.toString()
@@ -98,6 +106,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-1. 리뷰 작성
+    *  리뷰 등록 시 이미지가 있다면, 이미지를 파이어스토리지에 등록한다.
+    */
     private suspend fun uploadPhoto(uriList: List<Uri>) = withContext(Dispatchers.IO) {
         val uploadDeferred: List<Deferred<Any>> = uriList.mapIndexed { index, uri ->
             lifecycleScope.async {
@@ -119,6 +131,12 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         return@withContext uploadDeferred.awaitAll()
     }
 
+    /* 3. 내정보 탭
+    3-3-1. 리뷰 작성
+    *  - 특정 사진의 업로딩이 불가능한 경우
+    *  - 업로딩 완료된 사진이 없는 경우
+    *  - 모든 선택한 사진들이 업로딩이 완료된 경우
+    */
     private fun afterUploadPhoto(results: List<Any>, title: String, content: String, rating: Float, userId: String) {
         val errorResults = results.filterIsInstance<Pair<Uri, Exception>>()
         val successResults = results.filterIsInstance<String>()
@@ -136,6 +154,11 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-1. 리뷰 작성
+    *  - 선택한 사진들이 모두 업로딩 잘 되고 리뷰 등록하는 경우
+    *  - 사진은 없지만 리뷰 등록 하는 경우
+    */
     private fun uploadArticle(userId: String, title: String, content: String, rating: Float, imageUrlList: List<String>) {
         val reviewEntity = ReviewEntity(userId, title, System.currentTimeMillis(), content, rating, imageUrlList, orderId, restaurantTitle)
         firestore
@@ -146,6 +169,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         finish()
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  앨범이나 카메라 접근 권한 요청
+    */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -159,6 +186,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  앨범 접근
+    */
     private fun startGalleryScreen() {
         startActivityForResult(
             GalleryActivity.newIntent(this),
@@ -166,6 +197,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         )
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  카메라 접근
+    */
     private fun startCameraScreen() {
         val intent = Intent(this, CameraActivity::class.java)
         startActivityForResult(intent, CAMERA_REQUEST_CODE)
@@ -215,6 +250,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  이미지 첨부 클릭 시 첨부 방법 요청
+    */
     private fun showPictureUploadDialog() {
         AlertDialog.Builder(this)
             .setTitle("사진첨부")
@@ -233,6 +272,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
             .show()
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  앨범이나 카메라 접근 권한 여부 확인
+    */
     private fun checkExternalStoragePermission(uploadAction: () -> Unit) {
         when {
             ContextCompat.checkSelfPermission(
@@ -250,6 +293,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
         }
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  앨범 접근을 위한 권한 요청 재고 (이전에 거부 눌렀고 한번 더 눌렀을 때)
+    */
     private fun showPermissionContextPopup() {
         AlertDialog.Builder(this)
             .setTitle("권한이 필요합니다.")
@@ -262,6 +309,10 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
 
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  선택된 이미지들이 전부 업로딩 됐는지, 일부는 안됐는지 분기 처리
+    */
     private fun photoUploadErrorButContinueDialog(
         errorResults: List<Pair<Uri, Exception>>,
         successResults: List<String>,
@@ -282,11 +333,19 @@ class AddRestaurantReviewActivity : AppCompatActivity() {
             .show()
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  이미지 업로딩 에러
+    */
     private fun uploadError() {
         Toast.makeText(this, "사진 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
         hideProgress()
     }
 
+    /* 3. 내정보 탭
+    3-3-2. 갤러리, 카메라
+    *  선택된 이미지 리스트에서 클릭한 이미지 삭제
+    */
     private fun removePhoto(uri: Uri) {
         imageUriList.remove(uri)
         photoListAdapter.setPhotoList(imageUriList)

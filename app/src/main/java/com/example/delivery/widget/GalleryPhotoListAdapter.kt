@@ -20,6 +20,10 @@ class GalleryPhotoListAdapter(
         private val binding: ViewholderGalleryPhotoItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        /* 3. 내정보 탭
+        3-3-2. 갤러리, 카메라
+        *  선택됐을 때 체크 표시 토글
+        */
         fun bindData(data: GalleryPhoto) = with(binding) {
             photoImageView.load(data.uri.toString(), scaleType = CenterCrop())
             checkButton.setImageDrawable(

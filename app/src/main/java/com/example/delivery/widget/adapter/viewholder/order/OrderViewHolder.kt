@@ -19,6 +19,10 @@ class OrderViewHolder(
         binding.orderContentText.text = ""
     }
 
+    /* 3. 내정보 탭
+    3-3. 주문 내역
+    *  주문 내역의 정보 표시
+    */
     override fun bindData(model: OrderModel) {
         super.bindData(model)
         with(binding) {
