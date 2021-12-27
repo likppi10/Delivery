@@ -34,6 +34,11 @@ class RestaurantLikeListViewModel(
         }
     }
 
+    /* 2. 찜 탭
+        찜 가게 나열 : 클릭하면 해당 "가게 상세"로 이동
+    *  찜 된 가게에서 하트를 다시 누르게 되면 찜 리스트에서 삭제되고 fetch를 한번 더해줌으로써
+    *  즉각적인 적용을 할 수 있다.
+    */
     fun dislikeRestaurant(restaurantEntity: RestaurantEntity) = viewModelScope.launch {
         userRepository.deleteUserLikedRestaurant(restaurantEntity.restaurantTitle)
         fetchData()

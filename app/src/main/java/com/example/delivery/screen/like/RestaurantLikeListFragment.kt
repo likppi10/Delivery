@@ -18,6 +18,11 @@ class RestaurantLikeListFragment: BaseFragment<RestaurantLikeListViewModel, Frag
 
     private var isFirstShown = false
 
+    /* 2. 찜 탭
+       찜 가게 나열 : 클릭하면 해당 "가게 상세"로 이동
+   *  가게 리스트 아이템을 선택하면, 해당 "가게 상세"로 이동한다.
+   *  하트를 클릭하면 좋아요가 사라지고 찜이 취소된다.
+   */
     private val adapter by lazy {
         ModelRecyclerAdapter<RestaurantModel, RestaurantLikeListViewModel>(listOf(), viewModel, adapterListener = object : RestaurantLikeListListener {
 
